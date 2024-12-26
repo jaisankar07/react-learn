@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <title>React Learning Page</title>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Document</title>
 </head>
 
 <body>
-    <h1>React Learning Page</h1>
+    <h1> React Learning Page</h1>
     <p>React (also known as React.js or ReactJS) is a free and open-source front-end JavaScript library that aims to
         make building user interfaces based on components more "seamless". It is maintained by Meta (formerly Facebook)
         and a community of individual developers and companies.</p>
@@ -18,59 +19,65 @@
     <div id="features"></div>
     <div id="features1"></div>
     <div id="features2"></div>
-
-    <script>
-        // Rendering a simple paragraph
-        const para1 = React.createElement('p', { style: { color: 'blue' } }, 'React is the most popular Front-End library in 2024');
+    <script type="text/babel">
+        let para1 = React.createElement('p', { style: { color: 'blue' } }, 'React is most popular Front-End used in 2024')
         const root = ReactDOM.createRoot(document.getElementById('app'));
         root.render(para1);
 
-        // Rendering a feature list using React.createElement
-        const features = ['Simple & fast', 'VDOM', 'Unidirectional'];
-        const list = React.createElement('div', {}, [
-            React.createElement('h2', {}, 'React Features:'),
-            React.createElement('ul', { style: { color: 'blue' } }, features.map(feature => React.createElement('li', {}, feature))),
-        ]);
+        let features = ['Simple & fast', 'VDOM', 'Unidirectional'];
+        let list = React.createElement('div', {}, [
+            React.createElement('h2', {}, 'React Features :'),
+            React.createElement('ul', { style: { color: 'blue' } }, [
+                React.createElement('li', {}, features[0]),
+                React.createElement('li', {}, features[1]),
+                React.createElement('li', {}, features[2]),
+            ])
+        ]
+        )
         const featuresRoot = ReactDOM.createRoot(document.getElementById('features'));
         featuresRoot.render(list);
-
-        // Class-based Component using React.createElement
-        class FeatureComponentWithCreateElement extends React.Component {
-            handleClick = () => alert('I am being clicked!');
+        //component are the building block of the react app which represents the indepedent view of the app
+        //components helps to encapsulate the data and UI code
+        class FeatureComponent extends React.Component {
+            features = ['Simple & fast', 'VDOM', 'Unidirectional'];
+            hanldeClick = () => alert('i am being clicked!!')
             render() {
+                //return UI
                 return React.createElement('div', {}, [
-                    React.createElement('h2', {}, 'React Features:'),
+                    React.createElement('h2', {}, 'React Features :'),
                     React.createElement('ul', { style: { color: 'blue' } }, [
-                        React.createElement('li', { onClick: this.handleClick }, 'Simple & fast'),
-                        React.createElement('li', {}, 'VDOM'),
-                        React.createElement('li', {}, 'Unidirectional'),
-                    ]),
-                ]);
+                        React.createElement('li', { onClick: () => this.hanldeClick() }, this.features[0]),
+                        React.createElement('li', {}, this.features[1]),
+                        React.createElement('li', {}, this.features[2]),
+                    ])
+                ]
+                )
             }
         }
         const featuresRoot1 = ReactDOM.createRoot(document.getElementById('features1'));
-        featuresRoot1.render(React.createElement(FeatureComponentWithCreateElement));
+        featuresRoot1.render(React.createElement(FeatureComponent));
 
-        // Class-based Component using JSX
-        class FeatureComponentWithJSX extends React.Component {
+        //Component using JSX -template language to write UI in react
+        //JSX =JS + html/XML JS extension HTML
+        class FeatureComponent1 extends React.Component {
             features = ['Simple & fast', 'VDOM', 'Unidirectional'];
             title = 'React Features are listed below';
-            handleClick = () => alert('I am being clicked!');
+            hanldeClick = () => alert('i am being clicked!!')
             render() {
-                return (
-                    <div>
-                        <h2>{this.title}</h2>
-                        <ul>
-                            <li onClick={this.handleClick}>{this.features[0]}</li>
-                            <li>{this.features[1]}</li>
-                            <li>{this.features[2]}</li>
-                        </ul>
-                    </div>
-                );
+                //return UI
+                return <div style={{color:'purple'}}>
+                    <h2>{this.title}</h2>
+                    <ul>
+                        <li onClick={()=>this.hanldeClick()}>{this.features[0]}</li>
+                        <li>{this.features[1]}</li>
+                        <li>{this.features[2]}</li>
+                    </ul>
+                </div>
+
             }
         }
         const featuresRoot2 = ReactDOM.createRoot(document.getElementById('features2'));
-        featuresRoot2.render(<FeatureComponentWithJSX />);
+        featuresRoot2.render(<FeatureComponent1/>);
     </script>
 </body>
 
