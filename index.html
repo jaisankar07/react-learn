@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Example</title>
+</head>
+<body>
+  <!-- Container for the paragraph -->
+  <div id="app"></div>
+  
+  <!-- Container for the features list -->
+  <div id="features"></div>
+  
+  <!-- React and ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  
+  <!-- React Code -->
+  <script>
+    // Create a paragraph element
+    let para1 = React.createElement('p', { style: { color: 'blue' } }, 'React is the most popular Front-End used in 2024');
+    const root = ReactDOM.createRoot(document.getElementById('app'));
+    root.render(para1);
+
+    // Create a list of features
+    let features = ['Simple & fast', 'VDOM', 'Unidirectional'];
+    let list = React.createElement('div', {}, [
+      React.createElement('h2', {}, 'React Features:'),
+      React.createElement('ul', { style: { color: 'blue' } }, [
+        React.createElement('li', {}, features[0]),
+        React.createElement('li', {}, features[1]),
+        React.createElement('li', {}, features[2]),
+      ])
+    ]);
+    const featuresRoot = ReactDOM.createRoot(document.getElementById('features'));
+    featuresRoot.render(list);
+  </script>
+</body>
+</html>
