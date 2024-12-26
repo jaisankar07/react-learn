@@ -1,40 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>React Example</title>
-</head>
-<body>
-  <!-- Container for the paragraph -->
-  <div id="app"></div>
-  
-  <!-- Container for the features list -->
-  <div id="features"></div>
-  
-  <!-- React and ReactDOM -->
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  
-  <!-- React Code -->
-  <script>
-    // Create a paragraph element
-    let para1 = React.createElement('p', { style: { color: 'blue' } }, 'React is the most popular Front-End used in 2024');
-    const root = ReactDOM.createRoot(document.getElementById('app'));
-    root.render(para1);
 
-    // Create a list of features
-    let features = ['Simple & fast', 'VDOM', 'Unidirectional'];
-    let list = React.createElement('div', {}, [
-      React.createElement('h2', {}, 'React Features:'),
-      React.createElement('ul', { style: { color: 'blue' } }, [
-        React.createElement('li', {}, features[0]),
-        React.createElement('li', {}, features[1]),
-        React.createElement('li', {}, features[2]),
-      ])
-    ]);
-    const featuresRoot = ReactDOM.createRoot(document.getElementById('features'));
-    featuresRoot.render(list);
-  </script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <title>React Learning Page</title>
+</head>
+
+<body>
+    <h1>React Learning Page</h1>
+    <p>React (also known as React.js or ReactJS) is a free and open-source front-end JavaScript library that aims to
+        make building user interfaces based on components more "seamless". It is maintained by Meta (formerly Facebook)
+        and a community of individual developers and companies.</p>
+    <div id="app"></div>
+    <div id="features"></div>
+    <div id="features1"></div>
+    <div id="features2"></div>
+
+    <script>
+        // Rendering a simple paragraph
+        const para1 = React.createElement('p', { style: { color: 'blue' } }, 'React is the most popular Front-End library in 2024');
+        const root = ReactDOM.createRoot(document.getElementById('app'));
+        root.render(para1);
+
+        // Rendering a feature list using React.createElement
+        const features = ['Simple & fast', 'VDOM', 'Unidirectional'];
+        const list = React.createElement('div', {}, [
+            React.createElement('h2', {}, 'React Features:'),
+            React.createElement('ul', { style: { color: 'blue' } }, features.map(feature => React.createElement('li', {}, feature))),
+        ]);
+        const featuresRoot = ReactDOM.createRoot(document.getElementById('features'));
+        featuresRoot.render(list);
+
+        // Class-based Component using React.createElement
+        class FeatureComponentWithCreateElement extends React.Component {
+            handleClick = () => alert('I am being clicked!');
+            render() {
+                return React.createElement('div', {}, [
+                    React.createElement('h2', {}, 'React Features:'),
+                    React.createElement('ul', { style: { color: 'blue' } }, [
+                        React.createElement('li', { onClick: this.handleClick }, 'Simple & fast'),
+                        React.createElement('li', {}, 'VDOM'),
+                        React.createElement('li', {}, 'Unidirectional'),
+                    ]),
+                ]);
+            }
+        }
+        const featuresRoot1 = ReactDOM.createRoot(document.getElementById('features1'));
+        featuresRoot1.render(React.createElement(FeatureComponentWithCreateElement));
+
+        // Class-based Component using JSX
+        class FeatureComponentWithJSX extends React.Component {
+            features = ['Simple & fast', 'VDOM', 'Unidirectional'];
+            title = 'React Features are listed below';
+            handleClick = () => alert('I am being clicked!');
+            render() {
+                return (
+                    <div>
+                        <h2>{this.title}</h2>
+                        <ul>
+                            <li onClick={this.handleClick}>{this.features[0]}</li>
+                            <li>{this.features[1]}</li>
+                            <li>{this.features[2]}</li>
+                        </ul>
+                    </div>
+                );
+            }
+        }
+        const featuresRoot2 = ReactDOM.createRoot(document.getElementById('features2'));
+        featuresRoot2.render(<FeatureComponentWithJSX />);
+    </script>
 </body>
+
 </html>
